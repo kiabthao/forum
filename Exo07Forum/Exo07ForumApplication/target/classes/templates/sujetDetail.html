@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" th:href="@{/resources/css/main.css}" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Detail of Sujet</title>
+
+<script th:with="js=#{js_alert}">
+	function addContent(id) {
+		window.location.replace("/sujets/"+ id +"/commentaire/create");
+	}
+</script>
+</head>
+<body>
+	Sujet number
+	<span th:text="${sujet.id}"></span>
+	<br />
+	<span th:text="${sujet.name}"></span>
+
+	<table class="mainTable">
+		<thead>
+			<tr>
+				<th>id</th>
+				<th th:text="#{text}" />
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="sujetContent : ${sujet.sujetContents}">
+				<td th:text="${sujetContent.commentaire.id}" />
+				<td th:text="${sujetContent.commentaire.text}" />
+				<td width="30">
+					<a th:href="@{'/commentaire/' + ${sujetContent.id} + '/update/'}">
+						<img style="height: 30px;" th:src="@{/resources/img/update.png}" />
+					</a>
+				</td>
+				<td width="30">
+					<a th:href="@{'/commentaire/' + ${sujetContent.id} +'/delete/' }"> 
+						<img style="height: 30px;" th:src="@{/resources/img/delete.png}" />
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<br />
+	<input type="submit" id=button value="Back to list"	onclick="window.location='/'">
+	
+	<input type="submit" id=button value="Add Commentaire"		
+	th:onclick="'javascript:addContent(\'' + ${sujet.id} + '\');'">
+
+</body>
+</html>

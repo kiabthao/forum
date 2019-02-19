@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" th:href="@{/resources/css/main.css}" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>List of all Sujet</title>
+
+<script th:with="js=#{js_alert}">
+// function checkDelete(id) {
+// 	//	if(confirm("do you want to delete this specie ?")) {
+// 	if (confirm('[[${js}]]')) {
+// 		window.location.replace("/delete/" + id);
+// 	} else {
+// 		return;
+// 	}
+
+// }
+// function goToDetail(id) {
+// 		window.location.replace("/sujet/" + id);
+
+// }
+</script>
+</head>
+<body>
+	<table class="mainTable">
+		<thead>
+			<tr>
+				<th th:text="#{nameSujet}" />
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="sujet : ${sujets}">
+				<td th:text="${sujet.name}" />
+				<td width="30">
+					<a th:href="@{'sujets/' + ${sujet.id} + '/details/'}">
+						<img style="height: 30px;" th:src="@{/resources/img/see.png}" />
+					</a>
+				</td>
+				<td width="30">
+					<a th:href="@{'sujets/' + ${sujet.id} + '/update/'}">
+						<img style="height: 30px;" th:src="@{/resources/img/update.png}" />
+					</a>
+				</td>
+				<td width="30">
+					<a th:href="@{'sujets/' + ${sujet.id} + '/delete/'}">
+						<img style="height: 30px;" th:src="@{/resources/img/delete.png}" />
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<input type="submit" id=button value="add Sujet"	onclick="window.location='/sujets/create'">
+</body>
+</html>
